@@ -6,11 +6,8 @@ import { queryKeys } from '../../lib/queryKeys'
 import { formatDate } from '../../utils/format'
 import {
   BADGE,
-  BADGE_CLOSED,
   BADGE_OPEN,
-  BTN_GHOST,
   BTN_VOLT,
-  EYEBROW,
   MONO,
   PANEL,
   WRAP_APP,
@@ -27,7 +24,7 @@ const BADGE_STAT = 'border-hairline bg-raised text-ink'
 
 export default function AdminSubmissionsPage() {
   const toAdminPath = useAdminPath()
-  const { data, loading, error, reload } = useAsync(
+  const { data, loading, error } = useAsync(
     (options) => evaluationApi.loadSubmissionHackathonsWithCounts(options),
     { key: queryKeys.submissionsAdminHackathons, staleTime: 30_000 },
   )
@@ -55,38 +52,7 @@ export default function AdminSubmissionsPage() {
 
   return (
     <div className={`${WRAP_APP} py-7 md:py-10`}>
-      <header className="mb-7 flex flex-col gap-4 sm:mb-9 sm:flex-row sm:items-end sm:justify-between">
-        <div className="max-w-3xl">
-          <h1 className="mt-2 text-[28px] font-semibold tracking-[-0.03em] text-ink md:text-[36px]">
-            Submissions by hackathon
-          </h1>
-          <p className="mt-2 text-[15px] text-muted md:text-base">
-            Choose a hackathon to review its teams, run analysis, and publish reports.
-          </p>
-        </div>
-        <button
-          type="button"
-          className={`${BTN_GHOST} w-full sm:w-auto`}
-          onClick={() => reload({ force: true })}
-          disabled={loading && !data}
-        >
-          <Icon name="refresh" size={17} />
-          Refresh
-        </button>
-      </header>
-
       <div className="mb-6 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:items-center">
-        <div className={`${PANEL} flex min-w-[160px] items-center gap-3 px-4 py-3.5`}>
-          <span className="grid size-10 place-items-center rounded-drop border border-hairline bg-raised text-volt-ink">
-            <Icon name="trophy" size={18} />
-          </span>
-          <div>
-            <div className={`${MONO} text-[22px] leading-none font-semibold tracking-[-0.03em] text-ink`}>
-              {allHackathons.length}
-            </div>
-            <div className="mt-1 text-[12.5px] text-muted">Hackathons</div>
-          </div>
-        </div>
         <div className="relative min-w-0 flex-1 sm:max-w-md sm:ml-auto">
           <Icon
             name="search"
@@ -151,10 +117,6 @@ export default function AdminSubmissionsPage() {
                     </div>
                   )}
                   <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-canvas/80 via-transparent to-transparent" />
-                  <span className={`${BADGE} ${BADGE_CLOSED} absolute right-3.5 bottom-3 z-1`}>
-                    <strong className={`${MONO} mr-1 text-[13px]`}>{hackathon.submission_count || 0}</strong>
-                    submissions
-                  </span>
                 </div>
 
                 <div className="flex flex-1 flex-col gap-4 p-5">

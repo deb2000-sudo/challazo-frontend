@@ -11,6 +11,43 @@ import Icon from '../../components/ui/Icon'
 import Input from '../../components/ui/Input'
 import { LoadingBlock } from '../../components/ui/Spinner'
 
+function QueueCounts({ assigned, completed, pending }) {
+  const cells = [
+    {
+      label: 'Assigned',
+      value: assigned,
+      className: 'border-hairline bg-canvas text-ink',
+    },
+    {
+      label: 'Completed',
+      value: completed,
+      className: 'border-transparent bg-success-soft text-passed',
+    },
+    {
+      label: 'Pending',
+      value: pending,
+      className:
+        pending > 0
+          ? 'border-transparent bg-warning-soft text-warn'
+          : 'border-hairline bg-canvas text-muted',
+    },
+  ]
+  return (
+    <div className="grid grid-cols-3 gap-2 rounded-drop border border-hairline bg-raised p-2">
+      {cells.map((cell) => (
+        <div key={cell.label} className={`rounded-[8px] border px-2 py-2.5 text-center ${cell.className}`}>
+          <div className={`${MONO} text-[18px] leading-none font-semibold tracking-[-0.03em]`}>
+            {cell.value}
+          </div>
+          <div className="mt-1.5 text-[10.5px] font-medium tracking-[0.04em] uppercase">
+            {cell.label}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
 export default function EvaluatorDashboard() {
   const { data, loading, error, reload } = useAsync(
     (opts) => evaluationApi.listEvaluatorHackathons(opts),
@@ -124,10 +161,6 @@ export default function EvaluatorDashboard() {
                     </div>
                   )}
                   <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-canvas/80 via-transparent to-transparent" />
-                  <span className={`${BADGE} ${BADGE_CLOSED} absolute right-3.5 bottom-3 z-1`}>
-                    <strong className={`${MONO} mr-1 text-[13px]`}>{hackathon.submission_count || 0}</strong>
-                    assigned
-                  </span>
                 </div>
 
                 <div className="flex flex-1 flex-col gap-4 p-5">
@@ -146,13 +179,29 @@ export default function EvaluatorDashboard() {
                     </div>
                   </div>
 
-                  <Link
-                    to={`/evaluator/hackathons/${id}`}
-                    className={`${BTN_VOLT} mt-auto w-full`}
-                  >
-                    View assignments
-                    <Icon name="arrowRight" size={16} />
-                  </Link>
+                  <div className="mt-auto flex flex-col gap-3">
+                    <QueueCounts
+                      assigned={Number(hackathon.submission_count) || 0}
+                      completed={Number(hackathon.completed_count) || 0}
+                      pending={
+                        hackathon.pending_count == null
+                          ? Math.max(
+                              0,
+                              (Number(hackathon.submission_count) || 0) -
+                                (Number(hackathon.completed_count) || 0),
+                            )
+                          : Number(hackathon.pending_count) || 0
+                      }
+                    />
+
+                    <Link
+                      to={`/evaluator/hackathons/${id}`}
+                      className={`${BTN_VOLT} w-full`}
+                    >
+                      View assignments
+                      <Icon name="arrowRight" size={16} />
+                    </Link>
+                  </div>
                 </div>
               </article>
             )

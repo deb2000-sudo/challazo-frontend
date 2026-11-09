@@ -164,17 +164,33 @@ export default function AdminSubmissionDetailPage() {
   const publishedAt =
     publishedAtOverride === undefined ? submission?.published_at : publishedAtOverride
 
+  const analyzeLock = useRef(false)
   const analyze = async () => {
+    if (analyzeLock.current) return
+    analyzeLock.current = true
     setAction('analyzing')
     setActionError('')
     setActionMessage('')
     try {
-      await evaluationApi.evaluateSubmission(submission.id, null)
+      const updated = await evaluationApi.evaluateSubmission(submission.id, null)
+      if (updated?.status === 'completed') {
+        setActionMessage(
+          'This submission already has an evaluation for the current answers and rubric.',
+        )
+        restartPolling()
+        return
+      }
       restartPolling()
       setActionMessage('Analysis started. This page will update automatically when it completes.')
     } catch (analyzeError) {
+      if (analyzeError?.status === 409) {
+        restartPolling()
+        setActionMessage('AI evaluation is already running.')
+        return
+      }
       setActionError(analyzeError.message || 'Unable to start analysis.')
     } finally {
+      analyzeLock.current = false
       setAction('')
     }
   }

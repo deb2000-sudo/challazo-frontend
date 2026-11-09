@@ -142,17 +142,33 @@ export default function EvaluatorSubmissionDetailPage() {
       )
     : ''
 
+  const analyzeLock = useRef(false)
   const analyze = async () => {
+    if (analyzeLock.current) return
+    analyzeLock.current = true
     setAction('analyzing')
     setActionError('')
     setActionMessage('')
     try {
-      await evaluationApi.evaluateSubmission(submission.id, null)
+      const updated = await evaluationApi.evaluateSubmission(submission.id, null)
+      if (updated?.status === 'completed') {
+        setActionMessage(
+          'This submission already has an evaluation for the current answers and rubric.',
+        )
+        restartPolling()
+        return
+      }
       restartPolling()
       setActionMessage('AI evaluation started. This page will update automatically.')
     } catch (analyzeError) {
+      if (analyzeError?.status === 409) {
+        restartPolling()
+        setActionMessage('AI evaluation is already running.')
+        return
+      }
       setActionError(analyzeError.message || 'Unable to start AI evaluation.')
     } finally {
+      analyzeLock.current = false
       setAction('')
     }
   }
@@ -586,7 +602,8 @@ export default function EvaluatorSubmissionDetailPage() {
                 </div>
               )}
 
-              {failed && !canAnalyze && (
+              {/* Hand scoring needs no admin: the info box above says what to do instead. */}
+              {failed && !canAnalyze && !manualEvaluation && (
                 <Alert variant="danger">
                   AI evaluation failed. Ask an administrator if you need it re-run.
                 </Alert>
