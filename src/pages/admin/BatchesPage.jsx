@@ -172,7 +172,6 @@ export default function BatchesPage() {
   return (
     <div className={`${WRAP_APP} py-7 md:py-10`}>
       <PageHeader
-        eyebrow="Administration"
         title="Batch Management"
         description="Batches students choose from when they register, per university."
         actions={addButton}

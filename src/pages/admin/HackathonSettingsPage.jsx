@@ -59,7 +59,6 @@ export default function HackathonSettingsPage() {
   return (
     <div className={`${WRAP_APP} py-7 md:py-10`}>
       <PageHeader
-        eyebrow="Hackathon settings"
         title={hackathon.name}
         description={`${formatDate(hackathon.start_date)} – ${formatDate(hackathon.end_date)}`}
         actions={

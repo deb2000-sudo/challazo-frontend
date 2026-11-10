@@ -70,7 +70,6 @@ export default function ChangePasswordPage() {
   return (
     <div className="container container--narrow page">
       <PageHeader
-        eyebrow="Settings"
         title="Change password"
         description="Choose a new password for your Challazo account. You will need to sign in again afterward."
         actions={

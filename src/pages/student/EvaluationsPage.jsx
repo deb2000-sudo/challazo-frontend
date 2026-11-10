@@ -32,7 +32,6 @@ export default function EvaluationsPage() {
   return (
     <div className={`${WRAP_APP} student-evaluations-page py-7 md:py-10`}>
       <PageHeader
-        eyebrow="Evaluations"
         title="Your evaluations"
         description="Track your submissions and open reports after an administrator publishes them."
         actions={

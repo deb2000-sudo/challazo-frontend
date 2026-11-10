@@ -137,7 +137,6 @@ export default function EvaluatorsPage() {
   return (
     <div className={`${WRAP_APP} py-7 md:py-10`}>
       <PageHeader
-        eyebrow="Administration"
         title="Evaluator Management"
         description="Approve new evaluators and view all evaluator accounts."
         actions={

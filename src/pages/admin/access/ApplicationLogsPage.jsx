@@ -520,7 +520,6 @@ export default function ApplicationLogsPage() {
   return (
     <div className={`${WRAP_APP} py-7 md:py-10`}>
       <PageHeader
-        eyebrow="Application Access"
         title="Application Logs"
         description="Who is doing what, and how the application is holding up. Times are IST; logs are kept for 7 days."
         actions={

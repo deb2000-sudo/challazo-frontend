@@ -25,7 +25,6 @@ export default function ReviewSubmissionPage() {
   return (
     <div className="container container--narrow page">
       <PageHeader
-        eyebrow="Review"
         title="Review a submission"
         description="Enter the evaluation session ID shared with you to view its status and AI results."
       />
