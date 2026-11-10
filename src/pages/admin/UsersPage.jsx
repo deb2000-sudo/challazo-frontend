@@ -216,7 +216,6 @@ export default function UsersPage() {
   return (
     <div className={`${WRAP_APP} py-7 md:py-10`}>
       <PageHeader
-        eyebrow="Administration"
         title="Student Management"
         description="View and manage all registered student teams."
         actions={

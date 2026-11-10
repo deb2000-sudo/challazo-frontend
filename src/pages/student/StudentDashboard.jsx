@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../../hooks/useAuth'
 import { useAsync } from '../../hooks/useAsync'
 import { evaluationApi } from '../../api/evaluation'
 import { hackathonsApi } from '../../api/hackathons'
@@ -19,7 +18,6 @@ import Alert from '../../components/ui/Alert'
 import { LoadingBlock } from '../../components/ui/Spinner'
 
 export default function StudentDashboard() {
-  const { user } = useAuth()
   const { data, loading, error, reload } = useAsync(
     (opts) => evaluationApi.listSubmissions(opts),
     { key: queryKeys.submissionsMine, staleTime: 30_000 },
@@ -44,7 +42,6 @@ export default function StudentDashboard() {
   return (
     <div className={`${WRAP_APP} py-7 md:py-10`}>
       <PageHeader
-        eyebrow={`Welcome, ${user?.name?.split(' ')[0] || 'there'}`}
         title="Your submissions"
         description="Submit demo videos and view reports after they are published."
         actions={

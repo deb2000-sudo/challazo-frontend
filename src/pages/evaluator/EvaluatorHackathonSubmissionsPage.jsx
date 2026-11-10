@@ -46,7 +46,6 @@ export default function EvaluatorHackathonSubmissionsPage() {
   return (
     <div className={`${WRAP_APP} py-7 md:py-10 admin-submissions-page`}>
       <PageHeader
-        eyebrow="Evaluator queue"
         title={hackathonName}
         description={`${data?.length || 0} team${data?.length === 1 ? '' : 's'} assigned to you.`}
         actions={

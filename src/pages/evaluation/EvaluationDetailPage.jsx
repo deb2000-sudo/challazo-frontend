@@ -72,7 +72,6 @@ export default function EvaluationDetailPage() {
     return (
       <div className="container page student-eval-page">
         <PageHeader
-          eyebrow="Evaluation"
           title={session?.team_name || session?.title || session?.source_filename || 'Your evaluation'}
           description={
             canViewResult
@@ -153,7 +152,6 @@ export default function EvaluationDetailPage() {
   return (
     <div className="container page">
       <PageHeader
-        eyebrow="Evaluation"
         title={session?.team_name || session?.title || session?.source_filename || 'Submission'}
         description="AI evaluation of the submitted hackathon demo."
         actions={

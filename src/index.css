@@ -188,13 +188,6 @@ code {
 .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .page-header { margin-bottom: 28px; }
-.page-header .eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--brand-600);
-}
 .page-header h1 { margin-top: 6px; }
 .page-header p { color: var(--text-muted); margin-top: 6px; }
 

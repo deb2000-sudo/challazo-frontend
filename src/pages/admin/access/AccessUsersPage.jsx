@@ -276,7 +276,6 @@ export default function AccessUsersPage() {
   return (
     <div className={`${WRAP_APP} py-7 md:py-10`}>
       <PageHeader
-        eyebrow="Application Access"
         title="Application Managed Users"
         description="Super Admin, Admin and custom-role logins. Students and evaluators are managed on their own pages."
         actions={addButton}

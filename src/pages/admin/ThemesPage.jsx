@@ -85,7 +85,6 @@ export default function ThemesPage() {
   return (
     <div className={`${WRAP_APP} py-7 md:py-10 themes-page`}>
       <PageHeader
-        eyebrow="Hackathon setup"
         title="Themes"
         description="Create reusable themes and release selected themes for each hackathon."
         actions={

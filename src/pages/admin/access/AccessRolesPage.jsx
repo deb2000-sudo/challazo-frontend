@@ -219,7 +219,6 @@ export default function AccessRolesPage() {
   return (
     <div className={`${WRAP_APP} py-7 md:py-10`}>
       <PageHeader
-        eyebrow="Application Access"
         title="Application Managed Roles"
         description="Choose which admin screens each role can open. Assign roles to people under Application Managed Users."
         actions={addButton}

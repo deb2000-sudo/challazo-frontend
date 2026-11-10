@@ -140,7 +140,6 @@ export default function SubmissionVideoPage() {
   return (
     <div className={`${WRAP_APP} student-submission-video-page py-7 md:py-10`}>
       <PageHeader
-        eyebrow="Submitted video"
         title={session?.team_name || session?.title || session?.source_filename || 'Submission recording'}
         description="Review the complete video returned by the submission API."
         actions={

@@ -403,7 +403,6 @@ export default function AdminHackathonSubmissionsPage() {
   return (
     <div className={`${WRAP_APP} py-7 md:py-10 admin-submissions-page`}>
       <PageHeader
-        eyebrow={activeRound ? activeRound.name : 'Hackathon submissions'}
         title={hackathon?.name || 'Submissions'}
         description={
           hackathon
