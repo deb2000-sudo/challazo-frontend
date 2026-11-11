@@ -87,7 +87,6 @@ export default function AnalysisPage() {
 
   const header = (
     <PageHeader
-      eyebrow="Administration"
       title="Analysis"
       description="Compare hackathons by reach, campuses and project quality, and see how fast evaluators review."
     />

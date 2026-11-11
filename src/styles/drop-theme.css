@@ -655,10 +655,6 @@
     object-fit: cover;
   }
 
-  .drop .page-header .eyebrow {
-    color: var(--color-muted);
-  }
-
   .drop .brand__mark {
     color: var(--color-on-volt);
     background: var(--color-volt);

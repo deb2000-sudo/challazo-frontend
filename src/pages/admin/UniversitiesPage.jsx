@@ -137,7 +137,6 @@ export default function UniversitiesPage() {
   return (
     <div className={`${WRAP_APP} py-7 md:py-10`}>
       <PageHeader
-        eyebrow="Administration"
         title="University Management"
         description="Campuses students choose from when they register."
         actions={

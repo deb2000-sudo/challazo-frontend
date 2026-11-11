@@ -10,7 +10,7 @@ import { GhostMark, HeroScene } from './landing/LandingArt'
 import './landing/challazo-home.css'
 
 const PITCH =
-  "Find a hackathon, submit your build, and find out what's wrong with it before the deadline — not after."
+  "Find a hackathon, Submit your build, and find out what's wrong with it before the deadline — not after."
 
 /** The board is a teaser; the rest live behind "See all hackathons". */
 const PREVIEW_LIMIT = 6
