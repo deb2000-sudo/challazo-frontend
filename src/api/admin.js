@@ -1,4 +1,4 @@
-import { api } from './client'
+import { api, download } from './client'
 
 export const adminApi = {
   /**
@@ -8,7 +8,8 @@ export const adminApi = {
   getUsers: (options) => api.get('/admin/users', options),
 
   /**
-   * One page of users: `page` (1-based), `page_size` (max 100), `role`, `q`.
+   * One page of users: `page` (1-based), `page_size` (max 100), `role`, `q`,
+   * `university_id` (one college's users; an unknown id answers 400).
    * Sending `page` makes the backend answer `{ items, total, page, page_size }`;
    * an older backend ignores the params and still returns the full array.
    * Empty values are left out of the query string.
@@ -19,6 +20,19 @@ export const adminApi = {
       if (value !== undefined && value !== null && value !== '') search.set(name, String(value))
     })
     return api.get(`/admin/users?${search}`, options)
+  },
+
+  /**
+   * Download the students matching `university_id` and `q` as a CSV — every
+   * match, not one page, so `page` and `page_size` are never sent. Saved under
+   * the backend's filename, `students.csv` if it sends none. 400 for an
+   * unknown `university_id`. Resolves to the filename used.
+   */
+  exportStudents: ({ university_id, q } = {}, options) => {
+    const search = new URLSearchParams({ role: 'student' })
+    if (university_id) search.set('university_id', String(university_id))
+    if (q) search.set('q', String(q))
+    return download(`/admin/users/export?${search}`, { fallbackName: 'students.csv', ...options })
   },
 
   /**
